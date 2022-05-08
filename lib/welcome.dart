@@ -1,51 +1,47 @@
-import 'package:brainsys/homepage.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class DisplayImage extends StatelessWidget {
+  String imagePath = '';
+  DisplayImage({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 28),
-            ),
-            const Text(
-              'to',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 28),
-            ),
-            const Text(
-              'Brainsys',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 28),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              width: 200,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => HomePage()));
-                },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black38)),
-                child: const Text(
-                  'SIGN OUT',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, '/'),
+        backgroundColor: Colors.black54,
+        child: const Text('Logout', style: TextStyle(fontSize: 10),)//Icon(Icons.arrow_back),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 180,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/third');
+              },
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.black54)),
+              child: const Text(
+                'SCAN OBJECT',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18),
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            height: 400,
+            width: 400,
+            child: imagePath == '' ? null : Image.file(File(imagePath)),
+          ),
+        ],
       ),
     );
   }

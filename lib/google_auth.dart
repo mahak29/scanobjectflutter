@@ -28,6 +28,9 @@ class FirebaseService {
     await _auth.signOut();
   }
 
+
+  
+
 }
 
 class Resource {

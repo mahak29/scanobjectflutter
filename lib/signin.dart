@@ -172,11 +172,12 @@ class _SignInState extends State<SignIn> {
                 FirebaseService service = FirebaseService();
                 try {
                   await service.signInwithGoogle();
+                  Navigator.pushNamed(context, '/second');
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => WelcomeScreen())));
+                 // Navigator.push(
+                   //   context,
+                     // MaterialPageRoute(
+                       //   builder: ((context) => WelcomeScreen())));
                 } catch (e) {
                   if (e is FirebaseAuthException) {
                     Text(e.message!);
@@ -224,7 +225,7 @@ class _SignInState extends State<SignIn> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email.text.trim(), password: passwd.text.trim());
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
+          context, MaterialPageRoute(builder: (context) => DisplayImage(imagePath: '',)));
     } catch (e) {
       print(e.toString());
 
